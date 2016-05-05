@@ -3,14 +3,16 @@
 ```
 docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d onjin/alpine-postgres
 ```
-This creates user `postgres` with password `postgres`.
+This creates a container named `postgres` with Postgre super user `postgres` with password `postgres`.
 
 2) Create databases
 * Create `customer` database
 * Create `microservice1` database
 
 3) Execute `db/security.sql` against the database server.
+
 4) Execute `db/customer.sql` against `customer` database.
+
 5) Execute `db/microservice1.sql` against `microservice1` database.
 
 ### Foreign Schema
@@ -41,7 +43,7 @@ Output should be:
 psql -U postgres -W customer
 ```
 
-2) Test query as super user
+2) Test query as `postgres` super user
 Execute the following query against `customer` database:
 ```
 SELECT * FROM customer;
@@ -63,6 +65,12 @@ Output should be:
 psql -U test -W customer
 ```
 
+5) Test query as `test`
+Execute the following query against `customer` database:
+```
+SELECT * FROM customer;
+```
+
 Output should be:
 ```
  id | username |                           password                           | is_system | is_test |            modtime
@@ -71,11 +79,16 @@ Output should be:
 (1 row)
 ```
 
-5) Disconnect.
+6) Disconnect.
 
-6) Connect as `test2` to `customer` database.
+7) Connect as `test2` to `customer` database.
 ```
 psql -U test2 -W customer
+```
+8) Test query as `test2`
+Execute the following query against `customer` database:
+```
+SELECT * FROM customer;
 ```
 
 Output should be:
@@ -86,11 +99,18 @@ Output should be:
 (1 row)
 ```
 
-7) Disconnect.
+9) Disconnect.
 
-8) Connect as `test3` to `customer` database.
+10) Connect as `test3` to `customer` database.
 ```
 psql -U test3 -W customer
+```
+
+11) Test query as `test3`
+*Note:* in `db/customer.sql` user `test3` has limited `SELECT` permissions to `customer` table. Because of this `SELECT * FROM customer;` will not work. You need to specify the columns user has access to.
+Execute the following query against `customer` database:
+```
+SELECT id, username, is_system, is_test FROM customer;
 ```
 
 Output should be:
