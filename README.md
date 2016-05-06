@@ -3,7 +3,7 @@
 ```
 docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d onjin/alpine-postgres
 ```
-This creates a container named `postgres` with Postgre super user `postgres` with password `postgres`.
+This creates a container named `postgres` with Postgres super user `postgres` with password `postgres`.
 
 2) Create databases
 * Create `customer` database
@@ -53,9 +53,10 @@ Output should be:
 ```
  id | username |                           password                           | is_system | is_test |            modtime
 ----+----------+--------------------------------------------------------------+-----------+---------+-------------------------------
-  1 | test     | $2a$06$mBIeYWLAmzykrt68cnHQLe6Km.w1ZG1XxdaZMHJvWQoe.44G9pVGq | f         | t       | 2016-05-05 17:00:33.443258+00
-  2 | test2    | $2a$06$BbJYZdYZkSPpM.I/L3K9reDVQyqgOu4yHqfllY6qRQjjkgTQ8qYL. | f         | t       | 2016-05-05 17:00:33.443258+00
-(2 rows)
+  1 | test     | $2a$06$sPRfklhdpf2B5wohC2Btlul1LAx0Sp7J6pohuF.U1geogK7cEVbSG | f         | t       | 2016-05-05 19:26:49.930674+00
+  2 | test2    | $2a$06$tCh8s8GIqEP524osKzvlPu/WIf0HFK6drzfYUcGRX8TPmjPjegbP6 | f         | t       | 2016-05-05 19:26:49.930674+00
+  3 | test3    | $2a$06$MiOQ2tfoqSw9HB36TRUvyOhYYhovgKUOiUpLgCWI/mfAbjlyIm.7. | f         | t       | 2016-05-05 19:26:49.930674+00
+(3 rows)
 ```
 
 3) Disconnect.
